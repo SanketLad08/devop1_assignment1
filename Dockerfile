@@ -21,4 +21,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Run pytest with xvfb by default
-CMD ["xvfb-run", "-a", "pytest", "-v"]
+CMD ["xvfb-run", "-a", "pytest", "-vv", "--maxfail=1", "--disable-warnings"]
+
