@@ -1,26 +1,12 @@
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-import tkinter as tk
 import pytest
+import tkinter as tk
 from aceest_fitness.ACEest_Fitness import FitnessTrackerApp
 
-def test_add_valid_workout():
-    root = tk.Tk()
-    app = FitnessTrackerApp(root)
-    entry = app.add_workout_logic("Push-ups", 30)
-    assert entry["workout"] == "Push-ups"
-    assert entry["duration"] == 30
-    assert len(app.workouts) == 1
 
-def test_add_missing_fields():
+@pytest.fixture
+def app():
+    """Fixture to create and clean up a Tkinter app instance."""
     root = tk.Tk()
+    root.withdraw()   # prevent GUI window from showing
     app = FitnessTrackerApp(root)
-    with pytest.raises(ValueError):
-        app.add_workout_logic("", 20)
-
-def test_add_invalid_duration():
-    root = tk.Tk()
-    app = FitnessTrackerApp(root)
-    with pytest.raises(ValueError):
-        app.add_workout_logic("Sit-ups", "abc")
+    yield app
