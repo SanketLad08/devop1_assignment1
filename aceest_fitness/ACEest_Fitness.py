@@ -53,6 +53,17 @@ class FitnessTrackerApp:
             workout_list += f"{i+1}. {entry['workout']} - {entry['duration']} minutes\n"
         messagebox.showinfo("Workouts", workout_list)
 
+    def add_workout_logic(self, workout, duration):
+        if not workout or not duration:
+            raise ValueError("Workout and duration required")
+        try:
+            duration = int(duration)
+        except ValueError:
+            raise ValueError("Duration must be a number")
+        entry = {"workout": workout, "duration": duration}
+        self.workouts.append(entry)
+        return entry
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = FitnessTrackerApp(root)
