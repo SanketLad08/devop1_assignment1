@@ -15,6 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt pytest
 
 COPY . .
 
-# Run pytest in a virtual display
-ENTRYPOINT ["xvfb-run", "-a"]
-CMD ["pytest", "-v", "--maxfail=1", "--disable-warnings"]
+# Default command runs pytest in a virtual display
+CMD ["xvfb-run", "-a", "pytest", "-v", "--maxfail=1", "--disable-warnings"]
