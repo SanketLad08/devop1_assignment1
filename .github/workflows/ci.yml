@@ -20,5 +20,10 @@ jobs:
       - name: Build Docker image
         run: docker build -t aceest-fitness .
 
-      - name: Run tests inside container
+      # Debug step to verify files inside container
+      - name: List files inside container
+        run: docker run --rm aceest-fitness ls -R /app
+
+      # Run tests inside container
+      - name: Run Pytest inside container
         run: docker run --rm aceest-fitness
